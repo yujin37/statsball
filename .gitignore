@@ -1,0 +1,4 @@
+crawler/baseball.db
+giants_batting_full.csv
+giants_pitching_full.csv
+crawling_stats.py
