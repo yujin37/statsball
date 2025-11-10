@@ -1,13 +1,13 @@
-package com.statsball.statsball_service;
+package com.statsball.statsball_service.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class HomeController {
 
-    @GetMapping("/hello")
+    @GetMapping("/api/home")
     public String sayHello() {
-        return "Hello, Spring!";
+        return "Hello This is statsball!";
     }
 }
