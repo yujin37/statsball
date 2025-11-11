@@ -52,4 +52,9 @@ public class Player {
     private Double battingavg;
     private Double pinchhitteravg;
 
+    public Player(String name, String teams) {
+        this.name = name;
+        this.teams = teams;
+    }
+
 }
