@@ -57,4 +57,6 @@ public class Player {
         this.teams = teams;
     }
 
+    public Player() {}
+
 }
