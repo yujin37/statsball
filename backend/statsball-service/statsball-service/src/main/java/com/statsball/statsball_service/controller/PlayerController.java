@@ -6,6 +6,7 @@ import com.statsball.statsball_service.service.PlayerService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,8 +18,14 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping
+    @GetMapping("/allPlayers")
     public List<Player> allPlayers() {
         return playerService.getAllPlayers();
+    }
+
+    @GetMapping("/searchPlayers")
+    public List<Player> searchPlayers(@RequestParam(value="type", required = false) String type,
+                                      @RequestParam(value="keyword", required = false) String keyword) {
+        return playerService.getSearchPlayers(type, keyword);
     }
 }
