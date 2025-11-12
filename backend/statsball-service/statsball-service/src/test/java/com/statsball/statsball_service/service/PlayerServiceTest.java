@@ -1,8 +1,6 @@
 package com.statsball.statsball_service.service;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import com.statsball.statsball_service.domain.Player;
 import com.statsball.statsball_service.repository.PlayerRepository;
 import jakarta.transaction.Transactional;
@@ -47,6 +45,15 @@ public class PlayerServiceTest {
     public void testSearchPlayer(String type, String keyword) {
         List<Player> playerList = playerService.getSearchPlayers(type, keyword);
         assertThat(playerList.getFirst().getName()).isEqualTo("노시환");
+
+    }
+
+    @DisplayName("타자 정보 검색 실패")
+    @ParameterizedTest
+    @CsvSource({ "position, ", "name, 박찬호", "teams, Lions", "position, 유격수"})
+    public void testSearchPlayerFail(String type, String keyword) {
+        List<Player> playerList = playerService.getSearchPlayers(type, keyword);
+        assertThat(playerList).isEmpty();
 
     }
 }
