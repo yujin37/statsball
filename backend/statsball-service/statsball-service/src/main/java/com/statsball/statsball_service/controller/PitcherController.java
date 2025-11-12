@@ -2,12 +2,14 @@ package com.statsball.statsball_service.controller;
 
 import com.statsball.statsball_service.domain.Pitcher;
 import com.statsball.statsball_service.service.PitcherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name= "Pitcher")
 @RestController
 @RequestMapping("/api/pitcher")
 public class PitcherController {
