@@ -13,6 +13,6 @@ public interface PitcherRepository extends JpaRepository<Pitcher, Long> {
     List<Pitcher> findByQsIsGreaterThanEqual(int qs);
     List<Pitcher> findByHoldsIsGreaterThanEqual(int holds);
     List<Pitcher> findBySavesIsGreaterThanEqual(int saves);
-    @Query(value = "SELECT * FROM pitchers WHERE qs < 1 AND holds < 2 AND saves < 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM pitchers WHERE qs < 1 AND holds < 2 AND saves < 10", nativeQuery = true)
     List<Pitcher> findPitchersWithoutRole();
 }
