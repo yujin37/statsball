@@ -29,13 +29,16 @@ public class PlayerServiceTest {
         playerRepository.deleteAll();
         playerRepository.save(new Player("박해민", "Twins", "중견수"));
         playerRepository.save(new Player("노시환", "Eagles", "3루수"));
+        playerRepository.save(new Player("송성문", "Heroes", "3루수"));
+        playerRepository.save(new Player("문보경", "Twins", "1루수"));
+        playerRepository.save(new Player("안현민", "Wiz", "좌익수"));
     }
 
     @Test
     @DisplayName("타자 정보를 모두 출력")
     public void testFindAllPlayer() {
         List<Player> playerList = playerService.getAllPlayers();
-        assertThat(playerList.size()).isEqualTo(2);
+        assertThat(playerList.size()).isEqualTo(5);
         assertThat(playerList.get(0).getName()).isEqualTo("박해민");
     }
 
@@ -56,4 +59,13 @@ public class PlayerServiceTest {
         assertThat(playerList).isEmpty();
 
     }
+
+    @DisplayName("타자 포지션 별 검색")
+    @ParameterizedTest
+    @CsvSource({"내야수, 3", "외야수, 2", "포수, 0"})
+    public void testSearchPosition(String groupPosition, int expectedCount) {
+        List<Player> playerList = playerService.getPlayerPosition(groupPosition);
+        assertThat(playerList.size()).isEqualTo(expectedCount);
+    }
+
 }
