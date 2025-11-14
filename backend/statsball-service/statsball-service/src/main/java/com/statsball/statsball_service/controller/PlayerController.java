@@ -32,7 +32,7 @@ public class PlayerController {
     }
 
     @GetMapping("/locatePlayerPosition")
-    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", required = false) String groupPosition) {
+    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", defaultValue = "전체") String groupPosition) {
         return playerService.getPlayerPosition(groupPosition);
     }
 }
