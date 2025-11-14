@@ -29,16 +29,18 @@ public class PitcherServiceTest {
     @BeforeEach
     public void setUp() {
         pitcherRepository.deleteAll();
-        pitcherRepository.save(new Pitcher("박영현", "Wiz"));
-        pitcherRepository.save(new Pitcher("김택연", "Bears"));
-        pitcherRepository.save(new Pitcher("이로운", "Landers"));
+        pitcherRepository.save(new Pitcher("박영현", "Wiz", 0, 1, 35)); //마무리
+        pitcherRepository.save(new Pitcher("김택연", "Bears", 0, 0, 24)); //마무리
+        pitcherRepository.save(new Pitcher("곽빈", "Bears", 7, 0, 0)); //선발
+        pitcherRepository.save(new Pitcher("임찬규", "Twins", 15, 0, 0)); //선발
+        pitcherRepository.save(new Pitcher("이로운", "Landers", 0, 33, 1)); //불펜
 
     }
     @Test
     @DisplayName("투수 정보 모두 출력")
     public void testFindAllPitcher() {
         List<Pitcher> pitcherList = pitcherService.getAllPitchers();
-        assertThat(pitcherList.size()).isEqualTo(3);
+        assertThat(pitcherList.size()).isEqualTo(5);
         assertThat(pitcherList.getFirst().getName()).isEqualTo("박영현");
         assertThat(pitcherList.getLast().getName()).isEqualTo("이로운");
     }
@@ -58,5 +60,13 @@ public class PitcherServiceTest {
     public void testSearchPitcherFail(String type, String keyword) {
         List<Pitcher> pitcherList = pitcherService.getSearchPitchers(type, keyword);
         assertThat(pitcherList).isEmpty();
+    }
+
+    @DisplayName("투수 역할별 검색")
+    @ParameterizedTest
+    @CsvSource({"선발투수, 2", "불펜투수, 1", "마무리투수, 2", "그외, 0", "전체, 5"})
+    public void testRolePitcher(String role, int expetedCount) {
+        List<Pitcher> pitcherList = pitcherService.getRolePitchers(role);
+        assertThat(pitcherList.size()).isEqualTo(expetedCount);
     }
 }
