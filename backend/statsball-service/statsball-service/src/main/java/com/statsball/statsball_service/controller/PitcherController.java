@@ -29,4 +29,9 @@ public class PitcherController {
         return pitcherService.getSearchPitchers(type, keyword);
     }
 
+    @GetMapping("/rolePitchers")
+    public List<Pitcher> rolePitchers(@RequestParam(value="rule", defaultValue = "전체") String rule) {
+        return pitcherService.getRolePitchers(rule);
+    }
+
 }

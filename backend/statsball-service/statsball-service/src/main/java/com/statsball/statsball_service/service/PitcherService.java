@@ -36,4 +36,15 @@ public class PitcherService {
         };
     }
 
+    public List<Pitcher> getRolePitchers(String rule) {
+        return switch (rule) {
+            case ("전체") -> pitcherRepository.findAll();
+            case("선발투수") -> pitcherRepository.findByQsIsGreaterThanEqual(1);
+            case("불펜투수") -> pitcherRepository.findByHoldsIsGreaterThanEqual(2);
+            case("마무리투수") -> pitcherRepository.findBySavesIsGreaterThanEqual(1);
+            case("그외") -> pitcherRepository.findPitchersWithoutRole();
+            default -> new ArrayList<>();
+        };
+    }
+
 }
