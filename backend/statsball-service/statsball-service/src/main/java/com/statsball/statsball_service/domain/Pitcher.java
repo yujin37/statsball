@@ -49,9 +49,12 @@ public class Pitcher {
     private Double hits_percent;
     private Integer qs;
 
-    public Pitcher(String name, String team) {
+    public Pitcher(String name, String team, int qs, int holds, int saves) {
         this.name = name;
         this.teams = team;
+        this.qs = qs;
+        this.holds = holds;
+        this.saves = saves;
     }
 
     public Pitcher() {}
