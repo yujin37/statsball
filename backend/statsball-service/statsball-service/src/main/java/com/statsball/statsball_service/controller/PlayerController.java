@@ -3,11 +3,14 @@ package com.statsball.statsball_service.controller;
 import com.statsball.statsball_service.domain.Player;
 import com.statsball.statsball_service.repository.PlayerRepository;
 import com.statsball.statsball_service.service.PlayerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name="Player")
 @RestController
 @RequestMapping("/api/player")
 public class PlayerController {
@@ -17,8 +20,19 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping
+    @GetMapping("/allPlayers")
     public List<Player> allPlayers() {
         return playerService.getAllPlayers();
+    }
+
+    @GetMapping("/searchPlayers")
+    public List<Player> searchPlayers(@RequestParam(value="type", required = false) String type,
+                                      @RequestParam(value="keyword", required = false) String keyword) {
+        return playerService.getSearchPlayers(type, keyword);
+    }
+
+    @GetMapping("/locatePlayerPosition")
+    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", defaultValue = "전체") String groupPosition) {
+        return playerService.getPlayerPosition(groupPosition);
     }
 }
