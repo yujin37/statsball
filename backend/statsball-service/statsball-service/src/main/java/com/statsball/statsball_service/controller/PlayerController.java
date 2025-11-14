@@ -30,4 +30,9 @@ public class PlayerController {
                                       @RequestParam(value="keyword", required = false) String keyword) {
         return playerService.getSearchPlayers(type, keyword);
     }
+
+    @GetMapping("/locatePlayerPosition")
+    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", required = false) String groupPosition) {
+        return playerService.getPlayerPosition(groupPosition);
+    }
 }
