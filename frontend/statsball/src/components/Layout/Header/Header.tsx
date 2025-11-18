@@ -1,4 +1,6 @@
 import styles from './Header.module.scss'
+import { Link } from "react-router-dom";
+
 const Header = () => {
     return (
         <header className={styles.header}>
@@ -14,7 +16,7 @@ const Header = () => {
                         </li>
 
                         <li>
-                            선수 기록
+                            <Link to="/playerStats" className={styles.navLink} >선수 기록</Link>
                         </li>
 
                         <li>
@@ -22,7 +24,7 @@ const Header = () => {
                         </li>
 
                         <li>
-                            선수
+                            <Link to ="/playerInfo" className={styles.navLink} > 선수 </Link>
                         </li>
                     </ul>
                 </nav>
