@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Layout from "../../components/Layout/Layout"
-import style from "./players.module.scss";
+import style from "./batters.module.scss"
 import axios from "axios";
 
 interface BatterTab {
