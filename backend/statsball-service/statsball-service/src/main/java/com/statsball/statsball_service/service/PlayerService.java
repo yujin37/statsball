@@ -34,10 +34,10 @@ public class PlayerService {
 
     public List<Player> getPlayerPosition(String groupPosition) {
         return switch (groupPosition) {
-            case ("전체") -> playerRepository.findAll();
-            case ("내야수") -> playerRepository.findByPositionIn(List.of("1루수", "2루수", "3루수", "유격수"));
-            case ("외야수") -> playerRepository.findByPositionIn(List.of("좌익수", "우익수", "중견수"));
-            case ("포수") -> playerRepository.findByPositionIn(List.of("포수"));
+            case ("allBatter") -> playerRepository.findAll();
+            case ("infielder") -> playerRepository.findByPositionIn(List.of("1루수", "2루수", "3루수", "유격수"));
+            case ("outfielder") -> playerRepository.findByPositionIn(List.of("좌익수", "우익수", "중견수"));
+            case ("catcher") -> playerRepository.findByPositionIn(List.of("포수"));
             default -> new ArrayList<>();
         };
     }

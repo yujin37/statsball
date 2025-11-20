@@ -34,7 +34,7 @@ public class PlayerController {
     }
 
     @GetMapping("/locatePlayerPosition")
-    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", defaultValue = "전체") String groupPosition) {
+    public List<Player> locatePlayerPosition(@RequestParam(value="groupPosition", defaultValue = "allBatter") String groupPosition) {
         return playerService.getPlayerPosition(groupPosition);
     }
 }
