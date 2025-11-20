@@ -32,7 +32,7 @@ public class PitcherController {
     }
 
     @GetMapping("/rolePitchers")
-    public List<Pitcher> rolePitchers(@RequestParam(value="rule", defaultValue = "전체") String rule) {
+    public List<Pitcher> rolePitchers(@RequestParam(value="rule", defaultValue = "all") String rule) {
         return pitcherService.getRolePitchers(rule);
     }
 

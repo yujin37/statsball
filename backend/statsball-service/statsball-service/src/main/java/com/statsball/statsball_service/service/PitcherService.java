@@ -38,11 +38,11 @@ public class PitcherService {
 
     public List<Pitcher> getRolePitchers(String rule) {
         return switch (rule) {
-            case ("전체") -> pitcherRepository.findAll();
-            case("선발투수") -> pitcherRepository.findByQsIsGreaterThanEqual(1);
-            case("불펜투수") -> pitcherRepository.findByHoldsIsGreaterThanEqual(2);
-            case("마무리투수") -> pitcherRepository.findBySavesIsGreaterThanEqual(10);
-            case("그외") -> pitcherRepository.findPitchersWithoutRole();
+            case ("allPitcher") -> pitcherRepository.findAll();
+            case("startingPitcher") -> pitcherRepository.findByQsIsGreaterThanEqual(1);
+            case("bullpenPitcher") -> pitcherRepository.findByHoldsIsGreaterThanEqual(2);
+            case("closingPitcher") -> pitcherRepository.findBySavesIsGreaterThanEqual(10);
+            case("else") -> pitcherRepository.findPitchersWithoutRole();
             default -> new ArrayList<>();
         };
     }
