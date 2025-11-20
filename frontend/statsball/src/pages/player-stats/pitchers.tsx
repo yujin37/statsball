@@ -78,24 +78,24 @@ const PitchStats = () => {
             </ul>
         </div>
         <div className="tabContent">
-            {pitchers.map(p => (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>팀</th>
-                            <th>이름</th>
-                            <th>ERA</th>
-                            <th>출장 게임 수</th>
-                            <th>승</th>
-                            <th>패</th>
-                            <th>세이브</th>
-                            <th>홀드</th>
-                            <th>이닝</th>
-                            <th>WHIP</th>
-                            <th>QS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <table>
+                <thead>
+                    <tr>
+                        <th>팀</th>
+                        <th>이름</th>
+                        <th>ERA</th>
+                        <th>출장 게임 수</th>
+                        <th>승</th>
+                        <th>패</th>
+                        <th>세이브</th>
+                        <th>홀드</th>
+                        <th>이닝</th>
+                        <th>WHIP</th>
+                        <th>QS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {pitchers.map(p => (
                         <tr key = {p.id}>
                             <td>{p.teams}</td>
                             <td>{p.name}</td>
@@ -109,9 +109,10 @@ const PitchStats = () => {
                             <td>{p.whip}</td>
                             <td>{p.qs}</td>
                         </tr>
-                    </tbody>
-                </table>
-            ))}
+                    ))}
+                </tbody>
+            </table>
+            
         </div>
         </Layout>
     )
