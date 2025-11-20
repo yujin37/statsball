@@ -9,11 +9,11 @@ interface PitcherTab {
 }
 
 const pitcherTabList: PitcherTab[] = [
-        {tabName:'전체', rule: "전체"},
-        {tabName:'선발 투수', rule: '선발투수'},
-        {tabName:'불펜 투수', rule: '불펜투수'}, 
-        {tabName:'마무리 투수', rule: '마무리투수'},
-        {tabName:'그외', rule: '그외'}
+        {tabName:'전체', rule: 'allPitcher'},
+        {tabName:'선발 투수', rule: 'startingPitcher'},
+        {tabName:'불펜 투수', rule: 'bullpenPitcher'}, 
+        {tabName:'마무리 투수', rule: 'closingPitcher'},
+        {tabName:'그외', rule: 'else'}
 ];
 
 interface Pitcher {
@@ -41,7 +41,8 @@ const PitchStats = () => {
 
     const rule = pitcherTabList[tab].rule;
 
-    const setUrl = "http://168.107.37.97:8080/api/pitcher/rolePitchers?rule="
+    const setUrl = "/api/pitcher/rolePitchers?rule=";
+
     const fetchPitchers = async (rule: string) => {
         try {
             setLoading(true);
