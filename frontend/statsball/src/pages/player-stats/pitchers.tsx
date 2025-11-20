@@ -26,7 +26,7 @@ interface Pitcher {
     losses: number;
     saves: number;
     holds: number 
-    inning: string;
+    innings: string;
     whip: number;
     qs: number;
 }
@@ -64,54 +64,55 @@ const PitchStats = () => {
         <Layout>
         <h2>투수 기록</h2>
 
-        <div className="tabContainer">
+        <div className={style.tabContainer}>
             <ul>
                 {pitcherTabList.map((x, index) => (
                     <li
                     key = {index}
                     onClick={() => selectTabPitcher(index)}
-                    className={tab === index ? "on": ""}
+                    className={tab === index ? style.active: ""}
                     >
                         {x.tabName}
                     </li>
                 ))}
             </ul>
-        </div>
-        <div className="tabContent">
-            <table>
-                <thead>
-                    <tr>
-                        <th>팀</th>
-                        <th>이름</th>
-                        <th>ERA</th>
-                        <th>출장 게임 수</th>
-                        <th>승</th>
-                        <th>패</th>
-                        <th>세이브</th>
-                        <th>홀드</th>
-                        <th>이닝</th>
-                        <th>WHIP</th>
-                        <th>QS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {pitchers.map(p => (
-                        <tr key = {p.id}>
-                            <td>{p.teams}</td>
-                            <td>{p.name}</td>
-                            <td>{p.era}</td>
-                            <td>{p.game}</td>
-                            <td>{p.wins}</td>
-                            <td>{p.losses}</td>
-                            <td>{p.saves}</td>
-                            <td>{p.holds}</td>
-                            <td>{p.inning}</td>
-                            <td>{p.whip}</td>
-                            <td>{p.qs}</td>
+            <div className={style.tabContent}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>팀</th>
+                            <th>이름</th>
+                            <th>ERA</th>
+                            <th>출장 게임 수</th>
+                            <th>승</th>
+                            <th>패</th>
+                            <th>세이브</th>
+                            <th>홀드</th>
+                            <th>이닝</th>
+                            <th>WHIP</th>
+                            <th>QS</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {pitchers.map(p => (
+                            <tr key = {p.id}>
+                                <td>{p.teams}</td>
+                                <td>{p.name}</td>
+                                <td>{p.era}</td>
+                                <td>{p.game}</td>
+                                <td>{p.wins}</td>
+                                <td>{p.losses}</td>
+                                <td>{p.saves}</td>
+                                <td>{p.holds}</td>
+                                <td>{p.innings}</td>
+                                <td>{p.whip}</td>
+                                <td>{p.qs}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+        </div>
+        
             
         </div>
         </Layout>
