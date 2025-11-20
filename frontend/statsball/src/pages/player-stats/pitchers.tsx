@@ -94,7 +94,9 @@ const PitchStats = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {pitchers.map(p => (
+                        {pitchers.slice()
+                                 .sort((a, b) => a.name.localeCompare(b.name))
+                                 .map(p => (
                             <tr key = {p.id}>
                                 <td>{p.teams}</td>
                                 <td>{p.name}</td>

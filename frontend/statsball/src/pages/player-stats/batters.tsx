@@ -104,7 +104,9 @@ const BatterStats = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {batters.map(p => (
+                        {batters.slice()
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map(p => (
                             <tr key = {p.id}>
                                 <td>{p.teams}</td>
                                 <td>{p.name}</td>
