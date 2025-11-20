@@ -4,11 +4,13 @@ import com.statsball.statsball_service.domain.Pitcher;
 import com.statsball.statsball_service.service.PitcherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(originPatterns = "http://168.107.37.97:80/")
 @Tag(name= "Pitcher")
 @RestController
 @RequestMapping("/api/pitcher")
