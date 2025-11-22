@@ -24,6 +24,10 @@ const PitchStats = () => {
     const [loading, setLoading] = useState(false);
     const [originalPitchers, setOriginalPitchers] = useState<Pitcher[]>([]); // 전체 저장용
 
+    const [sortConfig, setSortConfig] = useState<{key: string, direction: "asc" | "desc"}>({
+        key: "name",
+        direction: "asc"
+    })
     /** ✔ 전체 투수 데이터 가져오기 */
     const fetchAllPitchers = async () => {
         try {
@@ -65,7 +69,30 @@ const PitchStats = () => {
         fetchAllPitchers();
     }, []);
 
-    
+    const sortedPitchers = [...pitchers].sort((a, b) => {
+        const {key, direction} = sortConfig;
+        const order = direction === "asc" ? 1: -1;
+
+        const aVal = a[key as keyof Pitcher];
+        const bVal = b[key as keyof Pitcher];
+
+        if(typeof aVal === "number" && typeof bVal === "number") {
+            return (aVal - bVal) * order;
+        }
+        return aVal.toString().localeCompare(bVal.toString()) * order;
+    });
+
+    const handleSort = (key: string) => {
+        setSortConfig(prev => ({
+            key,
+            direction: prev.key === key && prev.direction === "asc" ? "desc":"asc"
+        }));
+    }
+
+    const renderIcon = (key: string) => {
+        if(!sortConfig || sortConfig.key !== key) return "↕"; 
+        return sortConfig.direction === "asc"?  "▲" : "▼";
+    }
     
     return (
         <Layout>
@@ -84,24 +111,21 @@ const PitchStats = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>팀</th>
-                                <th>이름</th>
-                                <th>ERA</th>
-                                <th>출장 게임 수</th>
-                                <th>승</th>
-                                <th>패</th>
-                                <th>세이브</th>
-                                <th>홀드</th>
-                                <th>이닝</th>
-                                <th>WHIP</th>
-                                <th>QS</th>
+                                <th onClick={() => handleSort("teams")}>팀{renderIcon("teams")}</th>
+                                <th onClick={() => handleSort("name")}>이름{renderIcon("name")}</th>
+                                <th onClick={() => handleSort("era")}>ERA{renderIcon("era")}</th>
+                                <th onClick={() => handleSort("game")}>출장 게임 수{renderIcon("game")}</th>
+                                <th onClick={() => handleSort("wins")}>승{renderIcon("wins")}</th>
+                                <th onClick={() => handleSort("losses")}>패{renderIcon("losses")}</th>
+                                <th onClick={() => handleSort("saves")}>세이브{renderIcon("saves")}</th>
+                                <th onClick={() => handleSort("holds")}>홀드{renderIcon("holds")}</th>
+                                <th onClick={() => handleSort("innings")}>이닝{renderIcon("innings")}</th>
+                                <th onClick={() => handleSort("whip")}>WHIP{renderIcon("whip")}</th>
+                                <th onClick={() => handleSort("qs")}>QS{renderIcon("qs")}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {pitchers
-                                .slice()
-                                .sort((a, b) => a.name.localeCompare(b.name))
-                                .map((p) => (
+                            {sortedPitchers.map((p) => (
                                     <tr key={p.id}>
                                         <td>{p.teams}</td>
                                         <td>{p.name}</td>
