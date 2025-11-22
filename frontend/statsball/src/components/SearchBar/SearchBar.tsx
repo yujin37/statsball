@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { atom } from "recoil";
-
+import style from "./SearchBar.module.scss"
 interface SearchBarProps {
   onSearch: (keyword: string, criteria: string) => void;
   criteriaOptions?: CriteriaOption[];
@@ -21,7 +21,7 @@ const SearchBar = ({onSearch, criteriaOptions=[{label: "이름", value: "name"}]
     };
 
     return (
-        <div className="header">
+        <div className={style.header}>
             {criteriaOptions.length>1 && (
                 <select 
                 value = {criteria}
@@ -33,9 +33,9 @@ const SearchBar = ({onSearch, criteriaOptions=[{label: "이름", value: "name"}]
                     ))}
                 </select>
             )}
-            <input type="text" className="playerSearch" id="keyword"
+            <input type="text" className={style.playerSearch} id="keyword"
             value = {keyword} onChange={(e) => setKeyword(e.target.value)}/>
-            <button type="button" className="search" onClick={handleClick}>
+            <button type="button" className={style.search} onClick={handleClick}>
                 <span>검색</span>
             </button>
         </div>
