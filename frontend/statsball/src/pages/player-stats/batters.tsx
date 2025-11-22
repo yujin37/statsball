@@ -75,7 +75,7 @@ const BatterStats = () => {
         criteriaOptions={[
             { label: "이름", value: "name" },
             { label: "포지션", value: "position" },
-            { label: "팀", value: "team" },
+            { label: "팀", value: "teams" },
         ]}
         onSearch={(keyword, criteria) => handleSearch(keyword, criteria)}/>
         
