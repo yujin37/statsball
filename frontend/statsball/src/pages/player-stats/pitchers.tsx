@@ -28,7 +28,7 @@ const PitchStats = () => {
     const fetchAllPitchers = async () => {
         try {
             setLoading(true);
-            const res = await axios.get<Pitcher[]>("/api/pitcher/allPlayers");
+            const res = await axios.get<Pitcher[]>("/api/pitcher/allPitchers");
             setPitchers(res.data);
             setOriginalPitchers(res.data);
             console.log("전체 투수 데이터:", res.data);
@@ -42,7 +42,6 @@ const PitchStats = () => {
     
     const handleSearch = async (keyword: string, criteria: string) => {
         console.log("검색기준:", criteria, "Pitchers 검색:", keyword);
-
         if (!keyword.trim()) {
             setPitchers(originalPitchers);
             return;
@@ -51,7 +50,7 @@ const PitchStats = () => {
 
         try {
             setLoading(true);
-            const res = await axios.get<Pitcher[]>(`/api/pitcher/searchPlayers?${query}`);
+            const res = await axios.get<Pitcher[]>(`/api/pitcher/searchPitchers?${query}`);
             console.log("검색 결과:", res.data);
             setPitchers(res.data);
         } catch (error) {
