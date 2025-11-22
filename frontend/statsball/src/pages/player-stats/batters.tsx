@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Layout from "../../components/Layout/Layout"
-import style from "./batters.module.scss"
+import SearchBar from "../../components/SearchBar/SearchBar";
+import style from "./batters.module.scss";
 import axios from "axios";
 
 interface BatterTab {
@@ -47,7 +48,7 @@ const BatterStats = () => {
 
     const setUrl = "/api/player/locatePlayerPosition?groupPosition=";
 
-    const fetchBatters = async (rule: string) => {
+        const fetchBatters = async (rule: string) => {
         try {
             setLoading(true);
             const res = await axios.get<Batter[]>(
@@ -64,10 +65,34 @@ const BatterStats = () => {
         fetchBatters(rule);
         }, [rule]);
     
+    const handleSearch = async (keyword: string, criteria: string) => {
+        console.log("검색기준: ", criteria, "Batters 검색:", keyword);
+        const searchSetUrl = "/api/player/searchPlayers?";
+        const query = `type=${encodeURIComponent(criteria)}&keyword=${encodeURIComponent(keyword)}`;
+        try{
+            setLoading(true);
+            const res = await axios.get<Batter[]>(
+                searchSetUrl + query
+            );
+            console.log("API 응답:", res.data);  
+        } catch(error) {
+            console.error('데이터 가져오기 오류', error);
+            return []
+        }
+    };
+
     return (
         <Layout>
         <h2> 타자 기록</h2>
-
+        
+        <SearchBar 
+        criteriaOptions={[
+            { label: "이름", value: "name" },
+            { label: "포지션", value: "position" },
+            { label: "팀", value: "team" },
+        ]}
+        onSearch={(keyword, criteria) => handleSearch(keyword, criteria)}/>
+        
         <div className={style.tabContainer}>
             <ul>
                 {batterTabList.map((x, index) => (
