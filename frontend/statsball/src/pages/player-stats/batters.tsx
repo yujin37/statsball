@@ -58,7 +58,9 @@ const BatterStats = () => {
             const res = await axios.get<Batter[]>(
                 searchSetUrl + query
             );
+            setLoading(false);
             console.log("API 응답:", res.data);  
+            setBatters(res.data);
         } catch(error) {
             console.error('데이터 가져오기 오류', error);
             return []
