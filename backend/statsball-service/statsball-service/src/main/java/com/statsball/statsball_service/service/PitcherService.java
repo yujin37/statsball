@@ -54,7 +54,7 @@ public class PitcherService {
                                 .toList();
     }
 
-    public List<Player> getDetailPitcher(Long id) {
+    public List<Pitcher> getDetailPitcher(Long id) {
         return pitcherRepository.findById(id)
                 .map(List::of)
                 .orElseGet(List::of);

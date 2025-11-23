@@ -38,7 +38,7 @@ public class PitcherController {
     }
 
     @GetMapping("/detailPitcher")
-    public List<Player> detailPlayer(@RequestParam(value="id") Long id) {
+    public List<Pitcher> detailPlayer(@RequestParam(value="id") Long id) {
         return pitcherService.getDetailPitcher(id);
     }
 }
