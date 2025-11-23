@@ -41,4 +41,11 @@ public class PlayerService {
             default -> new ArrayList<>();
         };
     }
+
+    public List<Player> getTopAvgPlayers() {
+        return playerRepository.findTopOrderByAvgDesc()
+                                .stream()
+                                .limit(3)
+                                .toList();
+    }
 }

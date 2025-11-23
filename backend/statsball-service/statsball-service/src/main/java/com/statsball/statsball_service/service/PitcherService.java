@@ -47,4 +47,11 @@ public class PitcherService {
         };
     }
 
+    public List<Pitcher> getTopWinPitchers() {
+        return pitcherRepository.findTopOrderByWinDesc()
+                                .stream()
+                                .limit(3)
+                                .toList();
+    }
+
 }
