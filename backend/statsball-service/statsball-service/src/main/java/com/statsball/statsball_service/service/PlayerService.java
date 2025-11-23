@@ -48,4 +48,10 @@ public class PlayerService {
                                 .limit(3)
                                 .toList();
     }
+
+    public List<Player> getDetailPlayer(Long id) {
+        return playerRepository.findById(id)
+                .map(List::of)
+                .orElseGet(List::of);
+    }
 }
