@@ -3,7 +3,8 @@ import Layout from "../../components/Layout/Layout"
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./batters.module.scss";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
 interface Batter {
     id: number;
     teams: string;
@@ -34,6 +35,9 @@ const BatterStats = () => {
       direction: "asc"
   })
   
+  const [view, setView] = useState(false); 
+  const [currentType, setCurrentType] = useState("타자 정보");
+
   const fetchAllBatters = async () => {
   try {
       setLoading(true);
@@ -98,8 +102,30 @@ const renderIcon = (key: string) => {
 
     return (
         <Layout>
+        <div className={style.navWrapper}>
+          <ul className={style.breadcrumb}>
+            <li>선수 기록</li>
+            <li className={style.separator}>&gt;</li>
+            <li 
+              className={style.currentType}
+              onClick={() => setView(!view)}
+            >
+              {currentType} {view ? "⌃" : "⌄"}
+            </li>
+          </ul>
+
+          {view && (
+            <Dropdown
+              items={[
+                { label: "타자 정보", to: "/playerStats/battersStats" },
+                { label: "투수 정보", to: "/playerStats/pitchersStats" }
+              ]}
+              onSelect={() => setView(false)}
+            />
+          )}
+
+        </div>
         <h2> 타자 기록</h2>
-        
         <SearchBar 
         criteriaOptions={[
             { label: "이름", value: "name" },
