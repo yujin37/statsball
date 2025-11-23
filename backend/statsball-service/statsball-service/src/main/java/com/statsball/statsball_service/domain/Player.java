@@ -51,6 +51,7 @@ public class Player {
     private Double ops;
     private Double avg_with_runners;
     private Double pinch_hitter_avg;
+    private Integer number;
 
     public Player(String name, String teams, String position) {
         this.name = name;
