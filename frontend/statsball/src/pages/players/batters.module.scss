@@ -26,40 +26,30 @@
       }
   }
   }
-  .tabContent {
-    flex: 1;
-    padding: 24px;
-    height: 85%;
+  .batterCardContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 
-    p {
-      text-align: center;
+  .batterCard {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    width: 200px;
+    height:200px;
+    text-align: center;
+    background-color: #f9f9f9;
+    transition: transform 0.2s;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
   }
-  .table {
-    margin: 20px 0;
-  }
-  table {
-      font-family: Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 12px;
-      align-items: center;
-  }
-  table td, table th {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-  }
-  table th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: center;
-      background-color: #ffffff;
-      color: rgb(0, 0, 0);
+
+  .batterInfo > div {
+    margin: 4px 0;
+    font-size: 14px;
   }
 
 }
