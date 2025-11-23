@@ -3,6 +3,7 @@ import Layout from "../../components/Layout/Layout"
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./pitchers.module.scss"
 import axios from "axios";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 interface Pitcher {
     id: number;
@@ -22,13 +23,17 @@ interface Pitcher {
 const PitchStats = () => {
     const [pitchers, setPitchers] = useState<Pitcher[]>([]);
     const [loading, setLoading] = useState(false);
-    const [originalPitchers, setOriginalPitchers] = useState<Pitcher[]>([]); // 전체 저장용
+    const [originalPitchers, setOriginalPitchers] = useState<Pitcher[]>([]);
 
     const [sortConfig, setSortConfig] = useState<{key: string, direction: "asc" | "desc"}>({
         key: "name",
         direction: "asc"
     })
-    /** ✔ 전체 투수 데이터 가져오기 */
+
+    const [view, setView] = useState(false); 
+    const [currentType, setCurrentType] = useState("투수 정보");
+
+
     const fetchAllPitchers = async () => {
         try {
             setLoading(true);
@@ -64,7 +69,6 @@ const PitchStats = () => {
         }
     };
 
-    /** ✔ 페이지 로드시 전체 호출 */
     useEffect(() => {
         fetchAllPitchers();
     }, []);
@@ -96,6 +100,31 @@ const PitchStats = () => {
     
     return (
         <Layout>
+
+            <div className={style.navWrapper}>
+          <ul className={style.breadcrumb}>
+            <li>선수 기록</li>
+            <li className={style.separator}>&gt;</li>
+            <li 
+              className={style.currentType}
+              onClick={() => setView(!view)}
+            >
+              {currentType} {view ? "⌃" : "⌄"}
+            </li>
+          </ul>
+
+          {view && (
+            <Dropdown
+              items={[
+                { label: "타자 정보", to: "/playerStats/battersStats" },
+                { label: "투수 정보", to: "/playerStats/pitchersStats" }
+              ]}
+              onSelect={() => setView(false)}
+            />
+          )}
+
+        </div>
+
             <h2>투수 기록</h2>
 
             <SearchBar
