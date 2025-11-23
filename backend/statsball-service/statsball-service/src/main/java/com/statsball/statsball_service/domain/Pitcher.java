@@ -48,6 +48,7 @@ public class Pitcher {
     private Double whip;
     private Double hits_percent;
     private Integer qs;
+    private Integer number;
 
     public Pitcher(String name, String team, int qs, int holds, int saves) {
         this.name = name;

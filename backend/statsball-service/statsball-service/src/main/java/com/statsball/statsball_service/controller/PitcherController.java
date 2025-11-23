@@ -1,6 +1,7 @@
 package com.statsball.statsball_service.controller;
 
 import com.statsball.statsball_service.domain.Pitcher;
+import com.statsball.statsball_service.domain.Player;
 import com.statsball.statsball_service.service.PitcherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -36,4 +37,8 @@ public class PitcherController {
         return pitcherService.getRolePitchers(rule);
     }
 
+    @GetMapping("/detailPitcher")
+    public List<Player> detailPlayer(@RequestParam(value="id") Long id) {
+        return pitcherService.getDetailPitcher(id);
+    }
 }
