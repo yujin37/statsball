@@ -14,7 +14,7 @@ const Header = () => {
                 <nav className={styles.navigation}>
                     <ul>
                         <li>
-                            팀 기록
+                            <Link to ="/teamStats" className={styles.navLink}> 팀 기록 </Link>
                         </li>
 
                         <li>
