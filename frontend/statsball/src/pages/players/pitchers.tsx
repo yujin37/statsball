@@ -56,7 +56,7 @@ const PitcherInfo = () => {
         }, [rule]);
     
     const handlePitchers = (id: number) => {
-        navigate(`/pitcherInfo/pitcherDetail?id=${id}`);
+        navigate(`/playerInfo/pitcherInfo/pitcherDetail?id=${id}`);
     };
 
     return (

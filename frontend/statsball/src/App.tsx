@@ -22,8 +22,8 @@ function App() {
         <Route path="/playerInfo" element={<PlayerInfo />} />
         <Route path="/playerInfo/pitcherInfo" element={<PitcherInfo />} />
         <Route path="/playerInfo/batterInfo" element={<BatterInfo />} />
-        <Route path="/pitcherInfo/pitcherDetail" element={<PitchersDetail />} />
-        <Route path="/playerInfo/batterDetail" element={<BattersDetail />} />
+        <Route path="/playerInfo/pitcherInfo/pitcherDetail" element={<PitchersDetail />} />
+        <Route path="/playerInfo/batterInfo/batterDetail" element={<BattersDetail />} />
       </Routes>
     </BrowserRouter>
   );

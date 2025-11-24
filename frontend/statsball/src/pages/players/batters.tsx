@@ -55,7 +55,7 @@ const BatterInfo = () => {
         }, [rule]);
     
     const handleBatters = (id: number) => {
-        navigate(`/playerInfo/batterDetail?id=${id}`);
+        navigate(`/playerInfo/batterInfo/batterDetail?id=${id}`);
     };
 
     return (
