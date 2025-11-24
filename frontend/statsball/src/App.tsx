@@ -12,6 +12,7 @@ import BatterInfo from './pages/players/batters';
 import BattersDetail from './pages/players/battersDetail';
 import PitchersDetail from './pages/players/pitchersDetail';
 import TeamStats from './pages/team-stats/teamStats';
+import TeamInfo from './pages/teams/team';
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/playerInfo/pitcherInfo/pitcherDetail" element={<PitchersDetail />} />
         <Route path="/playerInfo/batterInfo/batterDetail" element={<BattersDetail />} />
         <Route path="/teamStats" element={<TeamStats />} />
+        <Route path="/teamInfo" element={<TeamInfo />} />
       </Routes>
     </BrowserRouter>
   );
