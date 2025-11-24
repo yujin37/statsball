@@ -35,4 +35,14 @@ public class RankingController {
     public List<Pitcher> getTopWinPitchers(@RequestParam(value = "type") String type) {
         return pitcherService.getTopPitchers(type);
     }
+
+    @GetMapping("/player/newPlayers")
+    public List<Player> getNewPlayers() {
+        return playerService.getNewPlayers();
+    }
+
+    @GetMapping("/pitcher/newPitchers")
+    public List<Pitcher> getNewPitchers() {
+        return pitcherService.getNewPitchers();
+    }
 }

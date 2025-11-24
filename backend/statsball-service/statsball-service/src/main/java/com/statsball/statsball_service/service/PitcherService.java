@@ -63,4 +63,8 @@ public class PitcherService {
                 .orElseGet(List::of);
     }
 
+    public List<Pitcher> getNewPitchers() {
+        return pitcherRepository.findTop5ByOrderByIdDesc();
+    }
+
 }

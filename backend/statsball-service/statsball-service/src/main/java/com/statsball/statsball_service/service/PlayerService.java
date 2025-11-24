@@ -57,4 +57,8 @@ public class PlayerService {
                 .map(List::of)
                 .orElseGet(List::of);
     }
+
+    public List<Player> getNewPlayers() {
+        return playerRepository.findTop5ByOrderByIdDesc();
+    }
 }

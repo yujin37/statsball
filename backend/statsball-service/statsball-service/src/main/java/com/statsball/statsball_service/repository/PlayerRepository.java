@@ -17,4 +17,5 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Query(value="SELECT * FROM players WHERE game >= 10 ORDER BY avg DESC", nativeQuery = true)
     List<Player> findTopOrderByAvgDesc();
     Optional<Player> findById(Long id);
+    List<Player> findTop5ByOrderByIdDesc();
 }
