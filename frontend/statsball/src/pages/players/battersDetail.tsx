@@ -1,8 +1,9 @@
 import Layout from "../../components/Layout/Layout"
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
+import left from "../../assets/left.png";
+import style from "./battersDetail.module.scss";
 interface Batter {
     teams: string;
     name: string;
@@ -45,7 +46,7 @@ const BattersDetail = () => {
     const id = queryParams.get("id"); 
     const [batter, setBatter] = useState<Batter | null>(null);
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();  
     const setUrl = "/api/player/detailPlayer?id=";
 
     useEffect(() => {
@@ -64,11 +65,17 @@ const BattersDetail = () => {
 
         fetchBatter();
     }, [id]);
+    
+    const handleBack = () => {
+        navigate(-1); //뒤로가기
+    };
+    
     if (loading) return <Layout><p>로딩중...</p></Layout>;
     if (!batter) return <Layout><p>선수를 찾을 수 없습니다.</p></Layout>;
 
     return (
         <Layout>
+            <img alt='back' onClick={handleBack} src={left} className={style.backBtn}/>
             <h2> 타자 상세 정보</h2>
             <h3>{batter.name}</h3>
             <h4>주요 성적</h4>
