@@ -4,6 +4,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./pitchers.module.scss"
 import axios from "axios";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import { Link } from "react-router-dom";
 
 interface Pitcher {
     id: number;
@@ -103,7 +104,9 @@ const PitchStats = () => {
 
             <div className={style.navWrapper}>
           <ul className={style.breadcrumb}>
-            <li>선수 기록</li>
+            <li>
+                <Link to="/playerStats" className={style.navLink}>선수 기록</Link>
+            </li>
             <li className={style.separator}>&gt;</li>
             <li 
               className={style.currentType}

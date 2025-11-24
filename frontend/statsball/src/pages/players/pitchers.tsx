@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout"
 import style from "./pitchers.module.scss"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "../../components/Dropdown/Dropdown";
 
 interface PitcherTab {
@@ -66,7 +66,9 @@ const PitcherInfo = () => {
         <Layout>
             <div className={style.navWrapper}>
                 <ul className={style.breadcrumb}>
-                    <li>선수 정보</li>
+                    <li>
+                        <Link to="/playerInfo" className={style.navLink}>선수 정보</Link>
+                    </li>
                     <li className={style.separator}>&gt;</li>
                     <li 
                     className={style.currentType}

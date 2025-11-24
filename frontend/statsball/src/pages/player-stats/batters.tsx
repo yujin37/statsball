@@ -104,7 +104,9 @@ const renderIcon = (key: string) => {
         <Layout>
         <div className={style.navWrapper}>
           <ul className={style.breadcrumb}>
-            <li>선수 기록</li>
+            <li>
+                <Link to="/playerStats" className={style.navLink}>선수 기록</Link>
+            </li>
             <li className={style.separator}>&gt;</li>
             <li 
               className={style.currentType}
