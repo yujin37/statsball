@@ -1,26 +1,28 @@
-
 .tabContent {
-  flex: 1;
-  padding: 24px;
-  height: 85%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-
+  width: 100%;
+  overflow-x: auto;  
+  padding: 10px 0;
+  display: block;  
   p {
     text-align: center;
   }
 }
+.tableWrapper {
+  min-width: 100px; 
+  display: inline-block;
+}
+
 .table {
   margin: 20px 0;
 }
+
 table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
     font-size: 12px;
     align-items: center;
+    width: max-content;  
+    border-collapse: collapse;
 }
 table td, table th {
     border: 1px solid #ddd;

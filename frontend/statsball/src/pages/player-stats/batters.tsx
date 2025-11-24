@@ -137,6 +137,7 @@ const renderIcon = (key: string) => {
         {loading && <p>로딩 중...</p>}
 
       <div className={style.tabContent}>
+        <div className={style.tableWrapper}>
         <table>
           <thead>
             <tr>
@@ -183,6 +184,7 @@ const renderIcon = (key: string) => {
               ))}
           </tbody>
         </table>
+        </div>
       </div>
     </Layout>
     )
