@@ -30,7 +30,7 @@ const PitcherInfo = () => {
     const [loading, setLoading] = useState(false);
     const [pitchers, setPitchers] = useState<Pitcher[]>([]);
     const [view, setView] = useState(false); 
-    const [currentType, setCurrentType] = useState("타자 정보");
+    const [currentType, setCurrentType] = useState("투수 정보");
     const selectTabPitcher = (index: number) => {
         setTab(index);
     }
