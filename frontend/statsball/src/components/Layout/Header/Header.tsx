@@ -1,18 +1,20 @@
 import styles from './Header.module.scss'
 import { Link } from "react-router-dom";
+import logo from "../../../assets/Statsball_logo_small.png";
 
 const Header = () => {
     return (
         <header className={styles.header}>
             <div className = {styles.contents}>
-                <div>
-                    <h1> Statsball</h1>
-                </div>
+                <Link to="/" className={styles.logoWrapper}>
+                    <img src={logo} alt="Statsball 로고" className={styles.logo} />
+                    <h1> Statsball </h1>
+                </Link>
 
                 <nav className={styles.navigation}>
                     <ul>
                         <li>
-                            팀 기록
+                            <Link to ="/teamStats" className={styles.navLink}> 팀 기록 </Link>
                         </li>
 
                         <li>
@@ -20,7 +22,7 @@ const Header = () => {
                         </li>
 
                         <li>
-                            팀
+                            <Link to="/teamInfo" className={styles.navLink} > 팀 </Link>
                         </li>
 
                         <li>

@@ -1,0 +1,11 @@
+.navContainer {
+  display: flex;             
+  justify-content: flex-end; 
+  margin-bottom: 5px;
+}
+.navLink {
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
+    font-size: small;
+}

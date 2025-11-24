@@ -104,7 +104,9 @@ const renderIcon = (key: string) => {
         <Layout>
         <div className={style.navWrapper}>
           <ul className={style.breadcrumb}>
-            <li>선수 기록</li>
+            <li>
+                <Link to="/playerStats" className={style.navLink}>선수 기록</Link>
+            </li>
             <li className={style.separator}>&gt;</li>
             <li 
               className={style.currentType}
@@ -137,6 +139,7 @@ const renderIcon = (key: string) => {
         {loading && <p>로딩 중...</p>}
 
       <div className={style.tabContent}>
+        <div className={style.tableWrapper}>
         <table>
           <thead>
             <tr>
@@ -183,6 +186,7 @@ const renderIcon = (key: string) => {
               ))}
           </tbody>
         </table>
+        </div>
       </div>
     </Layout>
     )

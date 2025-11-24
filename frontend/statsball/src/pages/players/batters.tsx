@@ -2,6 +2,9 @@ import Layout from "../../components/Layout/Layout"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import style from "./batters.module.scss";
+import { Link, useNavigate } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
+
 interface BatterTab {
   tabName: string;
   groupPosition: string;
@@ -19,20 +22,7 @@ interface Batter {
     teams: string;
     name: string;
     position: string;
-    avg: number;
-    game: number;
-    atbats: number;
-    hits: number;
-    home_runs: number;
-    runs_scored: number;
-    runs_batted_in: number;
-    stolen_bases: number;
-    caught_stealing: number;
-    strikeouts: number;
-    walks: number;
-    on_base_percent: number;
-    ops: number;
-    avg_with_runners: number;
+    number: number;
 }
 
 const BatterInfo = () => {
@@ -40,10 +30,14 @@ const BatterInfo = () => {
     const  [tab, setTab] = useState(0)
     const [batters, setBatters] = useState<Batter[]>([]);
     const [loading, setLoading] = useState(false);
+    const [view, setView] = useState(false); 
+    const [currentType, setCurrentType] = useState("타자 정보");
     const selectTabBatter = (index: number) => {
         setTab(index);
     }
 
+    const navigate = useNavigate();
+    
     const rule = batterTabList[tab].groupPosition;
 
     const setUrl = "/api/player/locatePlayerPosition?groupPosition=";
@@ -64,11 +58,38 @@ const BatterInfo = () => {
         fetchBatters(rule);
         }, [rule]);
     
+    const handleBatters = (id: number) => {
+        navigate(`/playerInfo/batterInfo/batterDetail?id=${id}`);
+    };
 
     return (
         <Layout>
-            <h2> 타자 정보</h2>
+            <div className={style.navWrapper}>
+                <ul className={style.breadcrumb}>
+                    <li>
+                        <Link to="/playerInfo" className={style.navLink}>선수 정보</Link>
+                    </li>
+                    <li className={style.separator}>&gt;</li>
+                    <li 
+                    className={style.currentType}
+                    onClick={() => setView(!view)}
+                    >
+                    {currentType} {view ? "⌃" : "⌄"}
+                    </li>
+                </ul>
 
+                {view && (
+                    <Dropdown
+                    items={[
+                        { label: "타자 정보", to: "/playerInfo/batterInfo" },
+                        { label: "투수 정보", to: "/playerInfo/pitcherInfo" }
+                    ]}
+                    onSelect={() => setView(false)}
+                    />
+                )}
+
+            </div>
+            <h2> 타자 정보</h2>
             <div className={style.tabContainer}>
             <ul>
                 {batterTabList.map((x, index) => (
@@ -81,56 +102,22 @@ const BatterInfo = () => {
                     </li>
                 ))}
             </ul>
-            <div className={style.tabContent}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>팀</th>
-                            <th>이름</th>
-                            <th>포지션</th>
-                            <th>타율</th>
-                            <th>출장 경기 수</th>
-                            <th>타수</th>
-                            <th>안타</th>
-                            <th>홈런</th>
-                            <th>득점</th>
-                            <th>타점</th>
-                            <th>도루</th>
-                            <th>도루실패</th>
-                            <th>삼진</th>
-                            <th>4사구</th>
-                            <th>출루율</th>
-                            <th>OPS</th>
-                            <th>득점권 타율</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {batters.slice()
-                                .sort((a, b) => a.name.localeCompare(b.name))
-                                .map(p => (
-                            <tr key = {p.id}>
-                                <td>{p.teams}</td>
-                                <td>{p.name}</td>
-                                <td>{p.position}</td>
-                                <td>{p.avg}</td>
-                                <td>{p.game}</td>
-                                <td>{p.atbats}</td>
-                                <td>{p.hits}</td>
-                                <td>{p.home_runs}</td>
-                                <td>{p.runs_scored}</td>
-                                <td>{p.runs_batted_in}</td>
-                                <td>{p.stolen_bases}</td>
-                                <td>{p.caught_stealing}</td>
-                                <td>{p.strikeouts}</td>
-                                <td>{p.walks}</td>
-                                <td>{p.on_base_percent}</td>
-                                <td>{p.ops}</td>
-                                <td>{p.avg_with_runners}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-        </div>
+            <div className={style.batterCardContainer}>
+                {batters
+                    .slice()
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((p) => (
+                    <div className={style.batterCard} key={p.id}
+                             onClick={() => handleBatters(p.id)} >
+                        <div className={style.batterInfo}>
+                        <div className={style.team}>{p.teams}</div>
+                        <div className={style.number}>{p.number}</div>
+                        <div className={style.name}>{p.name}</div>
+                        <div className={style.position}>{p.position}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         
             
         </div>

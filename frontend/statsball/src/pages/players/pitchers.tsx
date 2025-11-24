@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout"
 import style from "./pitchers.module.scss"
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 interface PitcherTab {
   tabName: string;
@@ -20,24 +22,21 @@ interface Pitcher {
     id: number;
     teams: string;
     name: string;
-    era: number;
-    game: number;
-    wins: number;
-    losses: number;
-    saves: number;
-    holds: number 
-    innings: string;
-    whip: number;
-    qs: number;
+    number: number;
 }
 
 const PitcherInfo = () => {
     const  [tab, setTab] = useState(0)
     const [loading, setLoading] = useState(false);
     const [pitchers, setPitchers] = useState<Pitcher[]>([]);
+    const [view, setView] = useState(false); 
+    const [currentType, setCurrentType] = useState("투수 정보");
     const selectTabPitcher = (index: number) => {
         setTab(index);
     }
+
+    const navigate = useNavigate();
+
     const rule = pitcherTabList[tab].rule;
 
     const setUrl = "/api/pitcher/rolePitchers?rule=";
@@ -58,9 +57,38 @@ const PitcherInfo = () => {
     useEffect(() => {
         fetchPitchers(rule);
         }, [rule]);
+    
+    const handlePitchers = (id: number) => {
+        navigate(`/playerInfo/pitcherInfo/pitcherDetail?id=${id}`);
+    };
 
     return (
         <Layout>
+            <div className={style.navWrapper}>
+                <ul className={style.breadcrumb}>
+                    <li>
+                        <Link to="/playerInfo" className={style.navLink}>선수 정보</Link>
+                    </li>
+                    <li className={style.separator}>&gt;</li>
+                    <li 
+                    className={style.currentType}
+                    onClick={() => setView(!view)}
+                    >
+                    {currentType} {view ? "⌃" : "⌄"}
+                    </li>
+                </ul>
+
+                {view && (
+                    <Dropdown
+                    items={[
+                        { label: "타자 정보", to: "/playerInfo/batterInfo" },
+                        { label: "투수 정보", to: "/playerInfo/pitcherInfo" }
+                    ]}
+                    onSelect={() => setView(false)}
+                    />
+                )}
+
+            </div>
             <h2> 투수 정보</h2>
             <div className={style.tabContainer}>
             <ul>
@@ -74,43 +102,20 @@ const PitcherInfo = () => {
                     </li>
                 ))}
             </ul>
-            <div className={style.tabContent}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>팀</th>
-                            <th>이름</th>
-                            <th>ERA</th>
-                            <th>출장 게임 수</th>
-                            <th>승</th>
-                            <th>패</th>
-                            <th>세이브</th>
-                            <th>홀드</th>
-                            <th>이닝</th>
-                            <th>WHIP</th>
-                            <th>QS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pitchers.slice()
-                                 .sort((a, b) => a.name.localeCompare(b.name))
-                                 .map(p => (
-                            <tr key = {p.id}>
-                                <td>{p.teams}</td>
-                                <td>{p.name}</td>
-                                <td>{p.era}</td>
-                                <td>{p.game}</td>
-                                <td>{p.wins}</td>
-                                <td>{p.losses}</td>
-                                <td>{p.saves}</td>
-                                <td>{p.holds}</td>
-                                <td>{p.innings}</td>
-                                <td>{p.whip}</td>
-                                <td>{p.qs}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className={style.batterCardContainer}>
+                {pitchers
+                    .slice()
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((p) => (
+                    <div className={style.batterCard} key={p.id}
+                             onClick={() => handlePitchers(p.id)} >
+                        <div className={style.batterInfo}>
+                        <div className={style.team}>{p.teams}</div>
+                        <div className={style.number}>{p.number}</div>
+                        <div className={style.name}>{p.name}</div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
         </Layout>
