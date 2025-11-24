@@ -22,7 +22,7 @@ const Header = () => {
                         </li>
 
                         <li>
-                            <Link to="teamInfo" className={styles.navLink} > 팀 </Link>
+                            <Link to="/teamInfo" className={styles.navLink} > 팀 </Link>
                         </li>
 
                         <li>
