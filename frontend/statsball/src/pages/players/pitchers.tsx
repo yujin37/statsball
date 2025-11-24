@@ -3,6 +3,7 @@ import Layout from "../../components/Layout/Layout"
 import style from "./pitchers.module.scss"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 interface PitcherTab {
   tabName: string;
@@ -28,6 +29,8 @@ const PitcherInfo = () => {
     const  [tab, setTab] = useState(0)
     const [loading, setLoading] = useState(false);
     const [pitchers, setPitchers] = useState<Pitcher[]>([]);
+    const [view, setView] = useState(false); 
+    const [currentType, setCurrentType] = useState("타자 정보");
     const selectTabPitcher = (index: number) => {
         setTab(index);
     }
@@ -61,6 +64,29 @@ const PitcherInfo = () => {
 
     return (
         <Layout>
+            <div className={style.navWrapper}>
+                <ul className={style.breadcrumb}>
+                    <li>선수 정보</li>
+                    <li className={style.separator}>&gt;</li>
+                    <li 
+                    className={style.currentType}
+                    onClick={() => setView(!view)}
+                    >
+                    {currentType} {view ? "⌃" : "⌄"}
+                    </li>
+                </ul>
+
+                {view && (
+                    <Dropdown
+                    items={[
+                        { label: "타자 정보", to: "/playerInfo/batterInfo" },
+                        { label: "투수 정보", to: "/playerInfo/pitcherInfo" }
+                    ]}
+                    onSelect={() => setView(false)}
+                    />
+                )}
+
+            </div>
             <h2> 투수 정보</h2>
             <div className={style.tabContainer}>
             <ul>

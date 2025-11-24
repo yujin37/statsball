@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import style from "./batters.module.scss";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
+
 interface BatterTab {
   tabName: string;
   groupPosition: string;
@@ -28,6 +30,8 @@ const BatterInfo = () => {
     const  [tab, setTab] = useState(0)
     const [batters, setBatters] = useState<Batter[]>([]);
     const [loading, setLoading] = useState(false);
+    const [view, setView] = useState(false); 
+    const [currentType, setCurrentType] = useState("타자 정보");
     const selectTabBatter = (index: number) => {
         setTab(index);
     }
@@ -60,8 +64,30 @@ const BatterInfo = () => {
 
     return (
         <Layout>
-            <h2> 타자 정보</h2>
+            <div className={style.navWrapper}>
+                <ul className={style.breadcrumb}>
+                    <li>선수 정보</li>
+                    <li className={style.separator}>&gt;</li>
+                    <li 
+                    className={style.currentType}
+                    onClick={() => setView(!view)}
+                    >
+                    {currentType} {view ? "⌃" : "⌄"}
+                    </li>
+                </ul>
 
+                {view && (
+                    <Dropdown
+                    items={[
+                        { label: "타자 정보", to: "/playerInfo/batterInfo" },
+                        { label: "투수 정보", to: "/playerInfo/pitcherInfo" }
+                    ]}
+                    onSelect={() => setView(false)}
+                    />
+                )}
+
+            </div>
+            <h2> 타자 정보</h2>
             <div className={style.tabContainer}>
             <ul>
                 {batterTabList.map((x, index) => (
