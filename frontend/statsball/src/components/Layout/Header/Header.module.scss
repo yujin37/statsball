@@ -33,3 +33,16 @@
     color:black;
     cursor: pointer;
 }
+
+.logo {
+  height: 50px;   /* 또는 50px */
+  width: auto;
+  object-fit: contain;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
