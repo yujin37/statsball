@@ -8,7 +8,7 @@ const Header = () => {
             <div className = {styles.contents}>
                 <Link to="/" className={styles.logoWrapper}>
                     <img src={logo} alt="Statsball 로고" className={styles.logo} />
-                    <h1> Statsball </h1>
+                    <h1 className={styles.headerTitle}> Statsball </h1>
                 </Link>
 
                 <nav className={styles.navigation}>
