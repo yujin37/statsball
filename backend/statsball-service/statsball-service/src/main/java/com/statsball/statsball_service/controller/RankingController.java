@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(originPatterns = "http://168.107.37.97:80/")
@@ -25,13 +26,13 @@ public class RankingController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/player/topAvgPlayers")
-    public List<Player> getTopAvgPlayers() {
-        return playerService.getTopAvgPlayers();
+    @GetMapping("/player/topPlayers")
+    public List<Player> getTopAvgPlayers(@RequestParam(value = "type") String type) {
+        return playerService.getTopPlayers(type);
     }
 
-    @GetMapping("/pitcher/topWinPitchers")
-    public List<Pitcher> getTopWinPitchers() {
-        return pitcherService.getTopWinPitchers();
+    @GetMapping("/pitcher/topPitchers")
+    public List<Pitcher> getTopWinPitchers(@RequestParam(value = "type") String type) {
+        return pitcherService.getTopPitchers(type);
     }
 }

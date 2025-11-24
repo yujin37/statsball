@@ -47,11 +47,14 @@ public class PitcherService {
         };
     }
 
-    public List<Pitcher> getTopWinPitchers() {
-        return pitcherRepository.findTopOrderByWinDesc()
-                                .stream()
-                                .limit(3)
-                                .toList();
+    public List<Pitcher> getTopPitchers(String type) {
+        return switch(type) {
+            case("wins") -> pitcherRepository.findTopOrderByWinDesc()
+                    .stream()
+                    .limit(3)
+                    .toList();
+            default -> new ArrayList<>();
+        };
     }
 
     public List<Pitcher> getDetailPitcher(Long id) {

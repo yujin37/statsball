@@ -42,11 +42,14 @@ public class PlayerService {
         };
     }
 
-    public List<Player> getTopAvgPlayers() {
-        return playerRepository.findTopOrderByAvgDesc()
-                                .stream()
-                                .limit(3)
-                                .toList();
+    public List<Player> getTopPlayers(String type) {
+        return switch(type) {
+            case ("avg") -> playerRepository.findTopOrderByAvgDesc()
+                    .stream()
+                    .limit(3)
+                    .toList();
+            default -> new ArrayList<>();
+        };
     }
 
     public List<Player> getDetailPlayer(Long id) {
