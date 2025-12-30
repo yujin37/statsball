@@ -5,7 +5,7 @@
 현재 2025 시즌 롯데 자이언츠 선수 데이터 중심으로 구현하였습니다. 
 React 기반의 프론트엔드와 Spring Boot 기반의 백엔드를 연결해 Oracle Cloud로 배포하였습니다. 
 ## 🌐배포 링크
-http://168.107.37.97/
+https://statsball.kro.kr/
 ## 🛠️사용한 기술
 ### Frontend
 - React
